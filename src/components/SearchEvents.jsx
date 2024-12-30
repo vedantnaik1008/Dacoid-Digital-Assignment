@@ -15,7 +15,7 @@ const SearchEvents = ({ events }) => {
             />
             {filterKeyword.length > 0 && Object.keys(events).length > 0 ? (
                 <ul className='flex flex-wrap h-full justify-center items-center gap-4 overflow-y-scroll overflow-x-hidden mt-4 transition-all duration-300 ease-in-out scrollbar'>
-                    {Object.entries(events) // Use Object.entries to get key-value pairs
+                    {Object.entries(events) // Object.entries to get key-value pairs
                         .flatMap(([dateKey, eventList]) =>
                             eventList
                                 .filter(
@@ -32,7 +32,7 @@ const SearchEvents = ({ events }) => {
                                             )
                                 )
                                 .map((event, index) => {
-                                    // Use UTC to create a consistent date without timezone issues
+                                    // to create a consistent date without timezone issues
                                     const eventDate = new Date(
                                         Date.UTC(
                                             ...dateKey
@@ -51,20 +51,15 @@ const SearchEvents = ({ events }) => {
                                             month: 'long',
                                             day: 'numeric'
                                         });
-
-                                    console.log(dateKey); // Log the dateKey for debugging
-
                                     return (
                                         <li
                                             key={index}
                                             className='border-black rounded-lg border px-3 py-3'>
                                             <h3>{formattedDate}</h3>{' '}
-                                            {/* Display event's formatted date */}
                                             <strong>{event.name}</strong> (
                                             {event.startTime} - {event.endTime})
                                             <br />
                                             <p>{event.description}</p>
-                                            {/* Add your delete and edit buttons here */}
                                         </li>
                                     );
                                 })

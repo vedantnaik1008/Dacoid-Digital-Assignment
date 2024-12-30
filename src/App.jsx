@@ -8,22 +8,22 @@ const App = () => {
     const today = new Date();
     const [currentYear, setCurrentYear] = useState(today.getFullYear());
     const [currentMonth, setCurrentMonth] = useState(today.getMonth());
-    const [events, setEvents] = useState({}); // Events stored as { 'YYYY-MM-DD': [{ name, startTime, endTime, description }] }
+    const [events, setEvents] = useState({}); // Events are stored as { 'YYYY-MM-DD': [{ name, startTime, endTime, description }] }
 
-    // Load events from localStorage when the component mounts
+    // Loads events from localStorage when the component mounts
     useEffect(() => {
         const storedEvents = localStorage.getItem('events');
         if (storedEvents) {
             try {
                 const parsedEvents = JSON.parse(storedEvents);
-                setEvents(parsedEvents); // Parse the events if found
+                setEvents(parsedEvents); // Parses the events if found
             } catch (error) {
                 console.error('Error parsing events from localStorage:', error);
             }
         }
     }, []);
 
-    // Update localStorage whenever events change
+    // Updates localStorage whenever events change
     useEffect(() => {
         if (Object.keys(events).length > 0) {
             localStorage.setItem('events', JSON.stringify(events));
@@ -43,7 +43,6 @@ const App = () => {
                 <SearchEvents events={events} />
             </header>
             <Calendar currentMonth={currentMonth} currentYear={currentYear} events={events} setEvents={setEvents} today={today}/>
-            
         </div>
     );
 };
